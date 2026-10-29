@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    background-color: #FAFAF7;
+    color: #111111;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #FAFAF7;
+    color: #111111;
+  }
+
+  /* Blue-tinted visited & hover state for editorial article links */
+  .editorial-link {
+    color: #1F44A8;
+    text-decoration-line: underline;
+    text-underline-offset: 3px;
+    transition: color 150ms ease;
+  }
+  .editorial-link:hover {
+    color: #1E3A8A;
+  }
+  .editorial-link:visited {
+    color: #2B3E78;
+  }
+}
+

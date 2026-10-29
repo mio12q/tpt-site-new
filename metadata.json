@@ -1,0 +1,6 @@
+{
+  "name": "Therapist Psychologist Today",
+  "description": "Independent medical journalism, clinical psychiatry research, mental health conditions, evidence-based treatments, and public health analysis at TherapistPsychologistToday.com.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
