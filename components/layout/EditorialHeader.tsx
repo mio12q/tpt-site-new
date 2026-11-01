@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -33,7 +33,26 @@ export function EditorialHeader() {
     router.push(`/directory?q=${encodeURIComponent(trimmed)}`);
   }
 
-  const formattedDate = 'Wednesday, October 28, 2026';
+  const [formattedDate, setFormattedDate] = useState(() =>
+    new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC',
+    })
+  );
+  useEffect(() => {
+    setFormattedDate(
+      new Date().toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC',
+      })
+    );
+  }, []);
 
   return (
     <>
@@ -134,7 +153,7 @@ export function EditorialHeader() {
         <div className="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-3 text-center">
           <Link
             href="/"
-            aria-label="Therapist Psychologist Today — Home"
+            aria-label="Therapist Psychologist Today â€” Home"
             className="inline-block group focus:outline-none"
           >
             <MastheadWordmark variant="blue-on-light" />
@@ -144,7 +163,7 @@ export function EditorialHeader() {
               Therapist Psychologist Today
             </strong>{' '}
             <span aria-hidden="true" className="mx-1.5 text-neutral-400">
-              —
+              â€”
             </span>{' '}
             Independent Journalism on Psychiatry, Behavioral Science &amp; Clinical Medicine
           </p>
@@ -221,11 +240,11 @@ export function EditorialHeader() {
               <Link href="/directory" onClick={() => setMobileMenuOpen(false)}>
                 Clinical Directory
               </Link>
-              <span>·</span>
+              <span>Â·</span>
               <Link href="/editorial-policy" onClick={() => setMobileMenuOpen(false)}>
                 Editorial Policy
               </Link>
-              <span>·</span>
+              <span>Â·</span>
               <Link href="/crisis-resources" onClick={() => setMobileMenuOpen(false)}>
                 988 Crisis Resources
               </Link>
@@ -289,3 +308,4 @@ export function EditorialHeader() {
     </>
   );
 }
+
