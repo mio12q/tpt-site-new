@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import { EditorialHeader } from '@/components/layout/EditorialHeader';
 import { EditorialFooter } from '@/components/layout/EditorialFooter';
@@ -8,9 +8,13 @@ import { MedicalDisclaimerStrip } from '@/components/editorial/MedicalDisclaimer
 import {
   publicationService,
   getTotalProgrammaticPageCount,
+  ensurePublicationHydrated,
 } from '@/lib/services/publication-service';
 
-export default function HomePage() {
+export const dynamic = 'force-dynamic';
+
+export default async function HomePage() {
+  await ensurePublicationHydrated();
   const leadArticle = publicationService.getLeadArticle();
   const secondaryArticles = publicationService.getSecondaryArticles();
   const allArticles = publicationService.getAllArticles();
@@ -37,7 +41,7 @@ export default function HomePage() {
               Breaking Dispatches
             </span>
             <span aria-hidden="true" className="text-neutral-300">
-              ·
+              Â·
             </span>
             {allArticles.slice(0, 3).map((art, idx) => {
               const timeStr = new Date(art.publishedAt).toLocaleTimeString('en-US', {
@@ -72,7 +76,7 @@ export default function HomePage() {
             href="/news-sitemap.xml"
             className="text-[11px] font-sans font-semibold text-[#1F44A8] hover:underline whitespace-nowrap shrink-0"
           >
-            48-Hr Google News Feed →
+            48-Hr Google News Feed â†’
           </Link>
         </section>
 
@@ -87,7 +91,7 @@ export default function HomePage() {
                   {leadArticle.section.replace('-', ' & ')}
                 </Link>
                 <span aria-hidden="true" className="text-neutral-400">
-                  ·
+                  Â·
                 </span>
                 <span className="text-neutral-600 font-normal">
                   {leadArticle.locationDateline}
@@ -120,7 +124,7 @@ export default function HomePage() {
                     </Link>
                   </span>
                 )}
-                <span aria-hidden="true">·</span>
+                <span aria-hidden="true">Â·</span>
                 {leadReviewer && (
                   <span>
                     Medically reviewed by{' '}
@@ -132,7 +136,7 @@ export default function HomePage() {
                     </Link>
                   </span>
                 )}
-                <span aria-hidden="true">·</span>
+                <span aria-hidden="true">Â·</span>
                 <span className="font-mono tabular-nums">
                   {leadArticle.readingTimeMinutes} min read
                 </span>
@@ -174,7 +178,7 @@ export default function HomePage() {
                           {secArt.section.replace('-', ' ')}
                         </Link>
                         <span aria-hidden="true" className="text-neutral-400">
-                          ·
+                          Â·
                         </span>
                         <span className="text-neutral-500 font-normal">
                           {secArt.locationDateline}
@@ -206,11 +210,11 @@ export default function HomePage() {
                       )}
                       {reviewer && (
                         <>
-                          <span aria-hidden="true">·</span>
+                          <span aria-hidden="true">Â·</span>
                           <span>Reviewed by {reviewer.name}, {reviewer.credentials}</span>
                         </>
                       )}
-                      <span aria-hidden="true">·</span>
+                      <span aria-hidden="true">Â·</span>
                       <span className="font-mono tabular-nums">
                         {secArt.readingTimeMinutes} min read
                       </span>
@@ -264,7 +268,7 @@ export default function HomePage() {
                           </Link>
                           <div className="mt-1 text-[11px] font-sans text-neutral-500 flex items-center gap-1.5">
                             <span>{art.locationDateline}</span>
-                            <span aria-hidden="true">·</span>
+                            <span aria-hidden="true">Â·</span>
                             <span>{art.primarySources[0]?.journalOrInstitution}</span>
                           </div>
                         </div>
@@ -291,7 +295,7 @@ export default function HomePage() {
                   href="/section/opinion"
                   className="text-[11px] font-sans font-semibold text-[#1F44A8] hover:underline"
                 >
-                  All Essays →
+                  All Essays â†’
                 </Link>
               </div>
 
@@ -319,7 +323,7 @@ export default function HomePage() {
                         href={`/articles/${opArt.slug}`}
                         className="hover:text-[#1F44A8] transition-colors"
                       >
-                        “{opArt.title}”
+                        â€œ{opArt.title}â€
                       </Link>
                     </h3>
                     <p className="mt-2 text-xs font-serif italic text-neutral-700 leading-relaxed">
@@ -356,7 +360,7 @@ export default function HomePage() {
                         {art.title}
                       </Link>
                       <span className="text-[11px] font-sans text-neutral-500 mt-1 block">
-                        {art.primarySources[0]?.journalOrInstitution} · {art.readingTimeMinutes} min
+                        {art.primarySources[0]?.journalOrInstitution} Â· {art.readingTimeMinutes} min
                         read
                       </span>
                     </div>
@@ -398,7 +402,7 @@ export default function HomePage() {
               href="/section/research-studies"
               className="text-xs font-sans font-bold uppercase tracking-wider text-[#1F44A8] hover:underline"
             >
-              View All Desk Reports →
+              View All Desk Reports â†’
             </Link>
           </div>
 
@@ -469,7 +473,7 @@ export default function HomePage() {
               href="/directory"
               className="px-4 py-2.5 bg-[#1E48B8] text-white text-xs font-sans font-bold uppercase tracking-wider hover:bg-[#1E3A8A] transition-colors whitespace-nowrap shrink-0 self-start md:self-auto"
             >
-              Explore Clinical Directory →
+              Explore Clinical Directory â†’
             </Link>
           </div>
 
@@ -505,7 +509,7 @@ export default function HomePage() {
                     href={page.urlPath}
                     className="font-semibold text-[#1F44A8] hover:underline"
                   >
-                    Read Clinical Guide →
+                    Read Clinical Guide â†’
                   </Link>
                 </div>
               </article>
@@ -523,3 +527,4 @@ export default function HomePage() {
     </div>
   );
 }
+

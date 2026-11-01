@@ -1,3 +1,4 @@
+﻿import { ensurePublicationHydrated } from '@/lib/services/publication-service';
 import React from 'react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
@@ -202,7 +203,7 @@ export default async function ArticleDetailPage({
               <Link href={`/section/${article.section}`} className="hover:underline">
                 {sectionInfo?.name || article.section}
               </Link>
-              <span aria-hidden="true">·</span>
+              <span aria-hidden="true">Â·</span>
               <span className="text-neutral-600 font-normal">
                 {article.locationDateline}
               </span>
@@ -228,7 +229,7 @@ export default async function ArticleDetailPage({
                     >
                       {author.name}, {author.credentials}
                     </Link>{' '}
-                    <span className="text-neutral-600">— {author.role}</span>
+                    <span className="text-neutral-600">â€” {author.role}</span>
                   </p>
                 )}
                 {reviewer && (
@@ -253,7 +254,7 @@ export default async function ArticleDetailPage({
                   Updated: <time dateTime={article.updatedAt}>{updatedDateFormatted}</time>
                 </div>
                 <div className="text-[#1F44A8] font-semibold">
-                  Last reviewed: <time dateTime={article.lastReviewedAt}>{reviewedDateFormatted}</time> ·{' '}
+                  Last reviewed: <time dateTime={article.lastReviewedAt}>{reviewedDateFormatted}</time> Â·{' '}
                   {article.readingTimeMinutes} min read
                 </div>
               </div>
@@ -317,10 +318,10 @@ export default async function ArticleDetailPage({
                 {/* Editorial Pull Quote */}
                 <blockquote className="my-8 py-6 px-6 bg-[#EEF2FB]/70 border-t border-b border-[#1E48B8]">
                   <p className="font-serif text-xl sm:text-2xl italic text-[#111111] leading-relaxed">
-                    “{article.pullQuote.quote}”
+                    â€œ{article.pullQuote.quote}â€
                   </p>
                   <footer className="mt-3 text-xs font-sans font-semibold uppercase tracking-wider text-[#1F44A8]">
-                    — {article.pullQuote.attribution}
+                    â€” {article.pullQuote.attribution}
                   </footer>
                 </blockquote>
               </div>
@@ -413,7 +414,7 @@ export default async function ArticleDetailPage({
                       </Link>
                     </h3>
                     <p className="text-neutral-700 mt-1">
-                      {reviewer.role} · {reviewer.institution}. ORCID: {reviewer.orcid}
+                      {reviewer.role} Â· {reviewer.institution}. ORCID: {reviewer.orcid}
                     </p>
                   </div>
                 )}
@@ -436,7 +437,7 @@ export default async function ArticleDetailPage({
                   {relatedPseoPages.map((p) => (
                     <li key={p.slug} className="border-b border-[#E5E5E0] last:border-b-0 pb-3 last:pb-0">
                       <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-neutral-500 block">
-                        {p.category.replace('-', ' ')} · {p.dsmOrIcdCode}
+                        {p.category.replace('-', ' ')} Â· {p.dsmOrIcdCode}
                       </span>
                       <Link
                         href={p.urlPath}
@@ -485,3 +486,4 @@ export default async function ArticleDetailPage({
     </div>
   );
 }
+

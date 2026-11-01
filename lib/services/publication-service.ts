@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import type {
   AdminUser,
@@ -519,3 +519,10 @@ export {
   getTotalProgrammaticPageCount,
 };
 
+
+export async function ensurePublicationHydrated(): Promise<void> {
+  const repo = getActiveRepository();
+  if (repo instanceof PostgresPublicationRepository) {
+    await repo.hydrateFromDatabase();
+  }
+}
